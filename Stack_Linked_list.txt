@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+public:
+    int data;
+    Node* next;
+};
+
+class Stack{
+private:
+    Node* top;
+
+public:
+    Stack(){
+        top = NULL;
+    }
+
+    void Push(int value){
+        Node* newNode= new Node;
+        newNode->data= value;
+        newNode->next = top;
+        top =newNode;
+    }
+
+    int Pop(){
+        if(IsEmpty()){
+            cout <<"Stack Underflow\n";
+            return -1;
+        }
+        int value = top->data;
+        Node* temp =top;
+        top = top->next;
+        delete temp;
+        return value;
+    }
+
+    bool IsEmpty(){
+        return  top== NULL;
+    }
+
+    int StackTop(){
+        if(IsEmpty()){
+            return -1;
+        }
+        return top->data;
+    }
+
+    void Display(){
+        if (IsEmpty()){
+            cout <<"Stack is empty\n";
+            return;
+        }
+        cout <<"Elements in the stack are:\n";
+        Node* temp = top;
+        while (temp != NULL){
+            cout << temp->data <<"\n" ;
+            temp =temp->next;
+        }
+    }
+};
+
+int main(){
+    Stack s;
+    s.Push(8);
+    s.Push(10);
+    s.Push(5);
+    s.Push(11);
+    s.Push(15);
+    s.Push(23);
+    s.Push(6);
+    s.Push(18);
+    s.Push(20);
+    s.Push(17);
+    s.Display();
+    s.Pop();
+    s.Pop();
+    s.Pop();
+    s.Pop();
+    s.Pop();
+    s.Display();
+    s.Push(4);
+    s.Push(30);
+    s.Push(3);
+    s.Push(1);
+    s.Display();
+
+    return 0;
+}
